@@ -39,10 +39,12 @@ public class EarthquakeFrame extends JFrame {
     }
 
     private void handleResponse(FeatureCollection response) {
-        String[] listData = Arrays.stream(response.features)
-                .map(feature -> feature.properties.mag + " " + feature.properties.place)
-                .toList()
-                .toArray(new String[0]);
+
+        String[] listData = new String[response.features.length];
+        for (int i = 0; i < response.features.length; i++) {
+            Feature feature = response.features[i];
+            listData[i] = feature.properties.mag + " " + feature.properties.place;
+        }
         jlist.setListData(listData);
     }
 
